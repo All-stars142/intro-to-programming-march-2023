@@ -5,7 +5,9 @@
         private decimal _balance = 5000;
         public void Deposit(decimal amountToDeposit)
         {
-            _balance += amountToDeposit;
+            var bonusCalculator = new StandardBonusCalculator();
+            var bonus = bonusCalculator.CalculateBankAccountDepositBonusFor(_balance, amountToDeposit);
+            _balance += amountToDeposit + bonus;
         }
 
         public decimal GetBalance()

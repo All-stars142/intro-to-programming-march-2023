@@ -20,7 +20,7 @@ public class MakingDeposits
         account.Deposit(amountToDeposit); // Command (Action)
 
         // then
-        Assert.Equal(openingBalance + amountToDeposit, 
+        Assert.Equal(openingBalance + amountToDeposit , 
             account.GetBalance());
     }
 }
