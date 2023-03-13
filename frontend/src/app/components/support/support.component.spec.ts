@@ -1,23 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { OnCallDeveloperResponseModel } from 'src/app/models/oncalldeveloper';
 
-import { SupportComponent } from './support.component';
 
-describe('SupportComponent', () => {
-  let component: SupportComponent;
-  let fixture: ComponentFixture<SupportComponent>;
+@Component({
+  selector: 'app-support',
+  templateUrl: './support.component.html',
+  styleUrls: ['./support.component.css']
+})
+export class SupportComponent {
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SupportComponent ]
-    })
-    .compileComponents();
+  onCallDeveloper$: Observable<OnCallDeveloperResponseModel>;
 
-    fixture = TestBed.createComponent(SupportComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  constructor(client:HttpClient) {
+    this.onCallDeveloper$ = client.get<OnCallDeveloperResponseModel>('http://localhost:1338/oncalldeveloper');
+  }
+}
